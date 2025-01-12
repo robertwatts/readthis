@@ -9,15 +9,13 @@ export async function getStaticPaths() {
 const { isbn } = Astro.params;
 const bookDetails = await getBookDetails(isbn);
 
+// Log the book details to debug
+console.log('Book Details:', bookDetails);
+
 // Handle the case where the book is not found
 if (!bookDetails) {
   console.log(`Book not found for ISBN: ${isbn}`);
-  return (
-    <Layout>
-      <h1>Book Not Found</h1>
-      <p>No details available for ISBN: {isbn}</p>
-    </Layout>
-  );
+  throw new Error('Book not found');
 }
 ---
 
