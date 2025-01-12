@@ -9,6 +9,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.1.5"
+    "@astrojs/node": "^9.0.0",
+    "@types/node-fetch": "^2.6.12",
+    "astro": "^5.1.5",
+    "node-fetch": "^3.3.2"
   }
 }
