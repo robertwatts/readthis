@@ -1,5 +1,5 @@
 ---
-import { getBookDetails } from '../../services/bookService';
+import { getBookDetails } from '../../services/bookService.ts';
 
 const { isbn } = Astro.params;
 const bookDetails = await getBookDetails(isbn);
