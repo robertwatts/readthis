@@ -7,11 +7,6 @@ export async function getStaticPaths() {
 }
 
 const { isbn } = Astro.params;
-
-export async function getStaticPaths() {
-  // Return an empty array to allow on-demand generation
-  return [];
-}
 const bookDetails = await getBookDetails(isbn);
 
 // Handle the case where the book is not found
