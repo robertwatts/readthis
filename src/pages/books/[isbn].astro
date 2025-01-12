@@ -1,0 +1,20 @@
+---
+import { getBookDetails } from '../../services/bookService';
+
+const { isbn } = Astro.params;
+const bookDetails = await getBookDetails(isbn);
+
+// Handle the case where the book is not found
+if (!bookDetails) {
+  throw new Error('Book not found');
+}
+---
+
+<Layout>
+  <h1>Book Details for ISBN: {isbn}</h1>
+  <div>
+    <h2>{bookDetails.volumeInfo.title}</h2>
+    <p>Authors: {bookDetails.volumeInfo.authors.join(', ')}</p>
+    <p>Description: {bookDetails.volumeInfo.description}</p>
+  </div>
+</Layout>
