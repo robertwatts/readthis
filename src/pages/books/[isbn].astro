@@ -1,6 +1,11 @@
 ---
 import { getBookDetails } from '../../services/bookService.ts';
 
+export async function getStaticPaths() {
+  // Return an empty array to allow on-demand generation
+  return [];
+}
+
 const { isbn } = Astro.params;
 
 export async function getStaticPaths() {
@@ -11,7 +16,13 @@ const bookDetails = await getBookDetails(isbn);
 
 // Handle the case where the book is not found
 if (!bookDetails) {
-  throw new Error('Book not found');
+  console.log(`Book not found for ISBN: ${isbn}`);
+  return (
+    <Layout>
+      <h1>Book Not Found</h1>
+      <p>No details available for ISBN: {isbn}</p>
+    </Layout>
+  );
 }
 ---
 
