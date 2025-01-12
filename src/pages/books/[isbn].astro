@@ -1,6 +1,8 @@
 ---
 import { getBookDetails } from '../../services/bookService.ts';
 
+const { isbn } = Astro.params;
+
 export async function getStaticPaths() {
   // Return an empty array to allow on-demand generation
   return [];
