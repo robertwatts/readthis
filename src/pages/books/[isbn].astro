@@ -8,6 +8,11 @@ export async function getStaticPaths() {
 }
 
 const { isbn } = Astro.params;
+const containerStyle = "max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg";
+const titleStyle = "text-3xl font-bold mb-4";
+const authorStyle = "text-xl text-gray-600 mb-2";
+const descriptionStyle = "text-gray-800";
+const errorStyle = "text-red-500";
 const bookDetails = await getBookDetails(isbn);
 
 // Handle the case where the book is not found
@@ -18,9 +23,15 @@ if (!bookDetails) {
 
 <Layout>
   <h1>Book Details for ISBN: {isbn}</h1>
-  <div>
-    <h2>{bookDetails.volumeInfo.title}</h2>
-    <p>Authors: {bookDetails.volumeInfo.authors.join(', ')}</p>
-    <p>Description: {bookDetails.volumeInfo.description}</p>
-  </div>
+  {bookDetails ? (
+    <div class={containerStyle}>
+      <h2 class={titleStyle}>{bookDetails.volumeInfo.title}</h2>
+      <p class={authorStyle}>Authors: {bookDetails.volumeInfo.authors.join(', ')}</p>
+      <p class={descriptionStyle}>Description: {bookDetails.volumeInfo.description}</p>
+    </div>
+  ) : (
+    <div class={containerStyle}>
+      <p class={errorStyle}>Book details not found.</p>
+    </div>
+  )}
 </Layout>
