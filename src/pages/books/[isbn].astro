@@ -27,8 +27,8 @@ if (!bookDetails) {
   <h1>Book Details for ISBN: {isbn}</h1>
   {bookDetails ? (
     <div class={containerStyle}>
-      {bookDetails.volumeInfo.imageLinks?.thumbnail && (
-        <img src={bookDetails.volumeInfo.imageLinks.thumbnail} alt={`Cover of ${bookDetails.volumeInfo.title}`} class={imageStyle} />
+      {bookDetails.volumeInfo.imageLinks?.medium && (
+        <img src={bookDetails.volumeInfo.imageLinks.medium} alt={`Cover of ${bookDetails.volumeInfo.title}`} class={imageStyle} />
       )}
       <h2 class={titleStyle}>{bookDetails.volumeInfo.title}</h2>
       <p class={authorStyle}>Authors: {bookDetails.volumeInfo.authors.join(', ')}</p>
