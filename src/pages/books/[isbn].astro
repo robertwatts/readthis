@@ -12,6 +12,7 @@ const { isbn } = Astro.params;
 const containerStyle = "max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg";
 const titleStyle = "text-3xl font-bold mb-4";
 const authorStyle = "text-xl text-gray-600 mb-2";
+const imageStyle = "w-full h-auto mb-4";
 const descriptionStyle = "text-gray-800";
 const errorStyle = "text-red-500";
 const bookDetails = await getBookDetails(isbn);
@@ -26,6 +27,9 @@ if (!bookDetails) {
   <h1>Book Details for ISBN: {isbn}</h1>
   {bookDetails ? (
     <div class={containerStyle}>
+      {bookDetails.volumeInfo.imageLinks?.thumbnail && (
+        <img src={bookDetails.volumeInfo.imageLinks.thumbnail} alt={`Cover of ${bookDetails.volumeInfo.title}`} class={imageStyle} />
+      )}
       <h2 class={titleStyle}>{bookDetails.volumeInfo.title}</h2>
       <p class={authorStyle}>Authors: {bookDetails.volumeInfo.authors.join(', ')}</p>
       <p class={descriptionStyle}>Description: {bookDetails.volumeInfo.description}</p>

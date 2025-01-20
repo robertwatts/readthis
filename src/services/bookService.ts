@@ -4,6 +4,9 @@ interface VolumeInfo {
   title: string;
   authors: string[];
   description: string;
+  imageLinks?: {
+    thumbnail: string;
+  };
 }
 
 interface Book {
