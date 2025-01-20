@@ -6,6 +6,7 @@ interface VolumeInfo {
   description: string;
   imageLinks?: {
     thumbnail: string;
+    medium?: string;
   };
 }
 
