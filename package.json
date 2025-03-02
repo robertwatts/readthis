@@ -1,12 +1,14 @@
 {
   "name": "readthis",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint . --ext .ts,.js",
+    "lint:fix": "eslint . --ext .ts,.js --fix"
   },
   "dependencies": {
     "@astrojs/node": "^9.1.0",
@@ -18,5 +20,11 @@
     "node-fetch": "^3.3.2",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.0.8"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.25.0",
+    "@typescript-eslint/parser": "^8.25.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-astro": "^1.3.1"
   }
 }
