@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export interface GoogleBookVolumeInfo {
   title: string;
   authors: string[];
@@ -12,11 +14,9 @@ export interface GoogleBook {
   volumeInfo: GoogleBookVolumeInfo;
 }
 
-import axios from 'axios';
-
 class GoogleBooksClient {
   private apiKey: string;
-  private baseUrl: string = 'https://www.googleapis.com/books/v1/volumes';
+  private baseUrl: string = "https://www.googleapis.com/books/v1/volumes";
 
   constructor(apiKey: string) {
     this.apiKey = apiKey;
@@ -30,10 +30,13 @@ class GoogleBooksClient {
           key: this.apiKey,
         },
       });
-      const books = response.data.items;
-      return books ? books[0] : null;
+      interface GoogleBooksApiResponse {
+        items?: GoogleBook[];
+      }
+      const data = response.data as GoogleBooksApiResponse;
+      return data.items ? data.items[0] : null;
     } catch (error) {
-      console.error('Error fetching from Google Books:', error);
+      console.error("Error fetching from Google Books:", error);
       return null;
     }
   }

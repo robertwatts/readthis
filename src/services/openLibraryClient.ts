@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export interface OpenLibraryBook {
   title: string;
   authors: { name: string }[];
@@ -9,24 +11,25 @@ export interface OpenLibraryBook {
   };
 }
 
-import axios from 'axios';
-
 class OpenLibraryClient {
-  private baseUrl: string = 'https://openlibrary.org/api/books';
+  private baseUrl: string = "https://openlibrary.org/api/books";
 
   async fetchBookByISBN(isbn: string): Promise<OpenLibraryBook | null> {
     try {
       const response = await axios.get(this.baseUrl, {
         params: {
           bibkeys: `ISBN:${isbn}`,
-          format: 'json',
-          jscmd: 'data',
+          format: "json",
+          jscmd: "data",
         },
       });
-      const bookData = response.data[`ISBN:${isbn}`];
-      return bookData || null;
+      interface OpenLibraryApiResponse {
+        [key: string]: OpenLibraryBook | undefined;
+      }
+      const data = response.data as OpenLibraryApiResponse;
+      return data[`ISBN:${isbn}`] || null;
     } catch (error) {
-      console.error('Error fetching from Open Library:', error);
+      console.error("Error fetching from Open Library:", error);
       return null;
     }
   }
