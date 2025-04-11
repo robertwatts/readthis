@@ -1,42 +1,73 @@
 ---
-import { getBookDetails } from '../../services/bookService.ts';
-import '../../styles/global.css';
-import Layout from '../../layouts/Layout.astro';
+import { BookService, type Book } from "../../services/bookService.pocketbase";
+import Layout from "../../layouts/Layout.astro";
 
-export async function getStaticPaths() {
-  // Return an empty array to allow on-demand generation
-  return [];
-}
+// This page will be rendered on-demand
+export const prerender = false;
 
 const { isbn } = Astro.params;
+const bookService = new BookService();
+
+// Try to fetch the book from PocketBase
+let book: Book | null = null;
+try {
+  if (isbn) {
+    book = await bookService.getBookByIsbn(isbn);
+    
+    // If not found by ISBN, try to get it by ID (in case the ISBN is actually an ID)
+    if (!book) {
+      book = await bookService.getBookById(isbn);
+    }
+  }
+} catch (error) {
+  console.error(`Error fetching book with ISBN ${isbn}:`, error);
+}
+
+// Define styles
 const containerStyle = "max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg";
 const titleStyle = "text-3xl font-bold mb-4";
 const authorStyle = "text-xl text-gray-600 mb-2";
-const imageStyle = "w-full h-auto mb-4";
-const descriptionStyle = "text-gray-800";
+const imageStyle = "w-full h-auto mb-4 rounded";
+const descriptionStyle = "text-gray-800 mb-6";
 const errorStyle = "text-red-500";
-const bookDetails = await getBookDetails(isbn);
-
-// Handle the case where the book is not found
-if (!bookDetails) {
-  throw new Error('Book not found');
-}
+const backButtonStyle = "inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700";
 ---
 
-<Layout>
-  <h1>Book Details for ISBN: {isbn}</h1>
-  {bookDetails ? (
-    <div class={containerStyle}>
-      {bookDetails.volumeInfo.imageLinks?.medium && (
-        <img src={bookDetails.volumeInfo.imageLinks.medium} alt={`Cover of ${bookDetails.volumeInfo.title}`} class={imageStyle} />
-      )}
-      <h2 class={titleStyle}>{bookDetails.volumeInfo.title}</h2>
-      <p class={authorStyle}>Authors: {bookDetails.volumeInfo.authors.join(', ')}</p>
-      <p class={descriptionStyle}>Description: {bookDetails.volumeInfo.description}</p>
-    </div>
-  ) : (
-    <div class={containerStyle}>
-      <p class={errorStyle}>Book details not found.</p>
-    </div>
-  )}
+<Layout title={book ? `${book.title} | ReadThis` : "Book Not Found | ReadThis"}>
+  <main class="container mx-auto px-4 py-8">
+    <a href="/books" class="inline-block mb-6 text-blue-600 hover:underline">← Back to Books</a>
+    
+    {book ? (
+      <div class={containerStyle}>
+        <h1 class={titleStyle}>{book.title}</h1>
+        
+        {book.author && <p class={authorStyle}>{book.author}</p>}
+        
+        {book.cover && (
+          <img src={book.cover} alt={`Cover of ${book.title}`} class={imageStyle} />
+        )}
+        
+        {book.description && (
+          <div class={descriptionStyle}>
+            <h2 class="text-xl font-semibold mb-2">Description</h2>
+            <p>{book.description}</p>
+          </div>
+        )}
+        
+        {book.isbn && (
+          <div class="text-gray-600">
+            <p>ISBN: {book.isbn}</p>
+          </div>
+        )}
+      </div>
+    ) : (
+      <div class={containerStyle}>
+        <h1 class={titleStyle}>Book Not Found</h1>
+        <p class={errorStyle}>
+          Sorry, we couldn't find a book with ISBN: {isbn}
+        </p>
+        <a href="/books" class={backButtonStyle}>Browse All Books</a>
+      </div>
+    )}
+  </main>
 </Layout>
