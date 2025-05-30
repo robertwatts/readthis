@@ -1,4 +1,5 @@
 import { PocketBaseService, type PocketBaseRecord } from "./pocketbaseService";
+import { getPocketBaseClient } from "./pocketbaseClient";
 
 /**
  * Interface for a book record in PocketBase
@@ -91,6 +92,3 @@ export class BookService extends PocketBaseService {
     return updatedBook as Book | null;
   }
 }
-
-// Import at the end to avoid circular dependencies
-import { getPocketBaseClient } from "./pocketbaseClient";
