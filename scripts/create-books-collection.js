@@ -39,7 +39,9 @@ async function setup() {
       { name: 'googleBooksId', type: 'text', required: false, options: {} },
       { name: 'openLibraryId', type: 'text', required: false, options: {} },
       { name: 'notes', type: 'text', required: false, options: {} },
-      { name: 'status', type: 'text', required: false, options: {} }, // Will be select later
+      // Status as text field - Select fields with predefined values can be added via the admin UI
+      // or after initial collection creation. Using text here for simplicity.
+      { name: 'status', type: 'text', required: false, options: {} },
       
       // Number fields
       { name: 'pageCount', type: 'number', required: false, options: {} },

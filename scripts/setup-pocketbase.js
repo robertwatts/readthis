@@ -199,6 +199,18 @@ const booksCollectionSchema = {
   deleteRule: null,
 };
 
+/**
+ * Note: API rules are set to null initially.
+ * After collection creation, they will be updated to empty strings ("")
+ * which provides public read/write access.
+ * For production, you should configure appropriate access rules:
+ * - listRule: "" (public read) or require authentication
+ * - viewRule: "" (public read) or require authentication  
+ * - createRule: "@request.auth.id != ''" (authenticated users only)
+ * - updateRule: "@request.auth.id != ''" (authenticated users only)
+ * - deleteRule: "@request.auth.id != ''" (authenticated users only)
+ */
+
 async function authenticateAdmin() {
   try {
     console.log('Authenticating as admin...');
