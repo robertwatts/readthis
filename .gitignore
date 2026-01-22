@@ -25,3 +25,10 @@ pnpm-debug.log*
 .idea/
 .vscode/
 .aider*
+
+# PocketBase
+pocketbase
+CHANGELOG.md
+LICENSE.md
+pb_data/
+pb_migrations/
