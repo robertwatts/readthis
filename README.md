@@ -35,6 +35,19 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm run pocketbase:setup`| Set up PocketBase with books collection          |
+
+## 📚 PocketBase Setup
+
+ReadThis uses PocketBase as its backend. To get started:
+
+1. Download PocketBase (see [SETUP-POCKETBASE.md](./SETUP-POCKETBASE.md) for instructions)
+2. Start PocketBase: `./pocketbase serve`
+3. Create admin user: `./pocketbase superuser create admin@example.com password`
+4. Set up books collection: `npm run pocketbase:setup`
+5. (Optional) Add sample books: `node scripts/add-sample-books.js`
+
+For detailed instructions, see [SETUP-POCKETBASE.md](./SETUP-POCKETBASE.md)
 
 ## 👀 Want to learn more?
 
