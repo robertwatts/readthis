@@ -181,12 +181,18 @@ export class MyService {
 ```typescript
 import axios from "axios";
 
+interface SearchResult {
+  id: string;
+  title: string;
+  // Add other fields as needed
+}
+
 /**
  * Fetches data from external API
  * @param query Search query
- * @returns Array of results
+ * @returns Array of search results
  */
-export async function searchExternalAPI(query: string): Promise<any[]> {
+export async function searchExternalAPI(query: string): Promise<SearchResult[]> {
   try {
     const response = await axios.get(`https://api.example.com/search`, {
       params: { q: query },
