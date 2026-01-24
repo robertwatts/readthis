@@ -38,9 +38,9 @@ The books collection includes comprehensive fields for both customer-facing info
 ### Metadata Fields
 - isbn, isbn10, isbn13
 - googleBooksId, openLibraryId
-- pageCount, rating, ratingsCount
+- pageCount
 - status (to-read, reading, completed, abandoned)
-- notes, tags (JSON array)
+- tags (JSON array)
 
 For the complete field list and setup process, see [SETUP-POCKETBASE.md](./SETUP-POCKETBASE.md).
 

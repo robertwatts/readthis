@@ -97,13 +97,10 @@ The books collection includes both customer-facing and metadata fields:
 - **googleBooksId** (text) - Google Books API identifier
 - **openLibraryId** (text) - Open Library API identifier
 - **pageCount** (number) - Number of pages
-- **rating** (number, 0-5) - Average rating
-- **ratingsCount** (number) - Number of ratings
 
 ### User Tracking Fields
 
 - **status** (text) - Reading status (to-read, reading, completed, abandoned)
-- **notes** (text) - Personal notes about the book
 - **tags** (JSON array) - Custom tags
 
 ## API Access
