@@ -10,7 +10,8 @@
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "pocketbase:setup": "node scripts/setup-pocketbase.js"
   },
   "dependencies": {
     "@astrojs/node": "^9.5.2",

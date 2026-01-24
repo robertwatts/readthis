@@ -5,11 +5,32 @@ import { getPocketBaseClient } from "./pocketbaseClient";
  * Interface for a book record in PocketBase
  */
 export interface Book extends PocketBaseRecord {
+  // Customer-facing fields
   title: string;
   author?: string;
+  subtitle?: string;
   description?: string;
-  cover?: string;
-  isbn?: string;
+  cover?: string; // URL to book cover image
+  publisher?: string;
+  publishedDate?: string;
+  language?: string;
+  categories?: string[]; // JSON array of categories
+
+  // ISBN fields
+  isbn?: string; // Primary ISBN (can be ISBN-10 or ISBN-13)
+  isbn10?: string;
+  isbn13?: string;
+
+  // External IDs
+  googleBooksId?: string;
+  openLibraryId?: string;
+
+  // Metadata fields
+  pageCount?: number;
+
+  // User tracking fields
+  status?: "to-read" | "reading" | "completed" | "abandoned";
+  tags?: string[]; // JSON array of tags
 }
 
 /**
