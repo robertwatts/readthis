@@ -3,6 +3,7 @@
 ## Project Overview
 
 ReadThis is a book-tracking application built with:
+
 - **Frontend Framework**: Astro 5.x (with TypeScript support)
 - **Backend**: PocketBase
 - **Styling**: Tailwind CSS 4.x
@@ -11,17 +12,20 @@ ReadThis is a book-tracking application built with:
 ## General Guidelines
 
 ### Code Quality
+
 - Always run linters and formatters before committing code
 - Use `npm run lint` to check for linting errors
 - Use `npm run format` to format code with Prettier
 - Follow TypeScript strict mode practices
 
 ### Testing and Building
+
 - Run `npm run build` to verify your changes don't break the build
 - Test locally with `npm run dev` before submitting changes
 - Preview production builds with `npm run preview`
 
 ### Documentation
+
 - Document all public APIs and exported functions with JSDoc comments
 - Include parameter types, return types, and descriptions
 - Update README.md if adding new features or changing workflows
@@ -30,6 +34,7 @@ ReadThis is a book-tracking application built with:
 ## Coding Standards
 
 ### TypeScript
+
 - Use TypeScript for all new code (`.ts` files for services, `.astro` for components)
 - Enable strict type checking - avoid using `any` types
 - Define proper interfaces and types for data structures
@@ -37,6 +42,7 @@ ReadThis is a book-tracking application built with:
 - Prefer `interface` over `type` for object shapes
 
 ### Code Style
+
 - Follow the Prettier configuration (`.prettierrc.json`):
   - Use semicolons
   - Use double quotes for strings
@@ -48,6 +54,7 @@ ReadThis is a book-tracking application built with:
 - Use descriptive variable and function names
 
 ### Astro Components
+
 - Use `.astro` files for pages and components
 - Prefer component composition over large monolithic files
 - Keep component logic in the frontmatter section
@@ -55,6 +62,7 @@ ReadThis is a book-tracking application built with:
 - Follow Astro's recommended project structure
 
 ### Services and Business Logic
+
 - Place all service logic in `/src/services/` directory
 - Create separate service files for different concerns:
   - PocketBase interactions: `*Service.pocketbase.ts` or `pocketbaseService.ts`
@@ -65,24 +73,28 @@ ReadThis is a book-tracking application built with:
 - Log errors to console for debugging
 
 ### Styling
+
 - Use Tailwind CSS utility classes for styling
 - Follow Tailwind's recommended practices
 - Keep custom CSS minimal - prefer Tailwind utilities
 - Use semantic class names when custom classes are needed
 
 ### Async/Await
+
 - Always use async/await for asynchronous operations
 - Avoid promise chains (`.then()`) - use async/await instead
 - Handle errors with try-catch blocks
 - Properly type async function return values
 
 ### Error Handling
+
 - Use try-catch blocks for operations that might fail
 - Log errors with descriptive messages using `console.error()`
 - Return sensible defaults or empty arrays/objects on error when appropriate
 - Don't let errors crash the application silently
 
 ### Naming Conventions
+
 - Use camelCase for variables, functions, and methods
 - Use PascalCase for classes, interfaces, and type definitions
 - Use UPPER_SNAKE_CASE for constants
@@ -92,6 +104,7 @@ ReadThis is a book-tracking application built with:
 ## File Organization
 
 ### Directory Structure
+
 ```
 src/
 ├── assets/       # Static assets
@@ -103,6 +116,7 @@ src/
 ```
 
 ### When Adding New Features
+
 - Place reusable components in `/src/components/`
 - Create new pages in `/src/pages/` following Astro's routing conventions
 - Add service logic to `/src/services/`
@@ -135,6 +149,7 @@ src/
 ## Specific Patterns to Follow
 
 ### Service Example
+
 ```typescript
 import { getPocketBaseClient } from "./pocketbaseClient";
 
@@ -162,6 +177,7 @@ export class MyService {
 ```
 
 ### API Client Example
+
 ```typescript
 import axios from "axios";
 
